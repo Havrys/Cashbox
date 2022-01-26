@@ -1,3 +1,31 @@
+/*Description
+Develop a cashbox program for a shop that sells different goods.
+Each good has the following properties:
+    В·ID
+    В·Price
+    В·Available quantity in stock
+Every day the shop receives a list of orders for goods. If a required good is not available in the shop,
+then the requirement is ignored; if less quantity is available, then the shop sells all available amount 
+of the good (and ignores the rest of the order for such a good).
+The program must calculate the total price of the goods sold every day.
+
+Input:
+1.An array of integers, where consecutive groups of three numbers describe goods:
+    1.1.ID, unique.
+    1.2.Price.
+    1.3.Available quantity in stock.
+2.Termination number -1.
+3.Number of days.
+4.For each day:
+    a.An array of integers, where consecutive groups of two numbers describe good orders:
+        i.ID.
+        ii.The ordered quantity of the item.
+    b.Termination number -1.
+
+Note: If there are several orders for the same ID, then corresponding quantities are summed for that good.
+
+The order of IDs in the input data is arbitrary.*/
+
 #include <iostream>
 #include <map>
 #include <algorithm>
@@ -12,12 +40,12 @@ private:
     std::map<int, std::pair<int, int>> m_storage;
 };
 
-// добавить один товар на склад
+// Г¤Г®ГЎГ ГўГЁГІГј Г®Г¤ГЁГ­ ГІГ®ГўГ Г° Г­Г  Г±ГЄГ«Г Г¤
 void Cashbox::storeItem(int id, int cost, int count) {
     m_storage[id] = std::make_pair(cost, count);
 }
 
-// посчитать стоимость заказа для одного ид
+// ГЇГ®Г±Г·ГЁГІГ ГІГј Г±ГІГ®ГЁГ¬Г®Г±ГІГј Г§Г ГЄГ Г§Г  Г¤Г«Гї Г®Г¤Г­Г®ГЈГ® ГЁГ¤
 int Cashbox::performRequest(int id, int count) {
     auto item = m_storage.find(id);
     if (item == m_storage.end())
